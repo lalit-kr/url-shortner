@@ -1,0 +1,70 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to URL Shortener!</h1>
+  <p class="lead">
+    Are you tired of long, messy URLs? <br />Look no further! Our URL Shortener
+    service is here to help you create concise and easy-to-share links.<br />
+    Simply paste your lengthy URL into the input box, and we'll generate a
+    shorter version for you in seconds. It's quick, hassle-free, and perfect for
+    sharing on social media, emails, or anywhere else you need.
+    <br />With our advanced features, you can even customize your shortened URLs
+    to make them more memorable and meaningful.
+  </p>
+  <hr class="my-4" />
+  <p>Start simplifying your links today with our URL Shortener. Try it now!</p>
+  <div class="lead">
+    <form class="form-inline" method="POST" action="/url">
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="url" class="sr-only">Enter your original URL</label>
+        <input
+          type="text"
+          class="form-control"
+          id="url"
+          name="url"
+          placeholder="https://example.com"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">
+        Generate Shortid
+      </button>
+    </form>
+    <% if(locals.id){ %>
+    <p>
+      Generated URL:
+      <a href="http://localhost:4979/<%=id%>">http://localhost:4979/<%=id%></a>
+    </p>
+    <% } %>
+  </div>
+  <br /><br />
+  <div class="lead">
+    <% if(locals.urls) {%>
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">ShortID</th>
+          <th scope="col">Redirect URL</th>
+          <th scope="col">Clicks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% urls.forEach((url,index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td>
+            <a href="http://localhost:4979/<%= url.shortId %>"
+              ><%= url.shortId %></a
+            >
+          </td>
+          <td><%= url.redirectUrl %></td>
+          <td><%= url.visitHistory.length %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% } %>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
