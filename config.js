@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 
 // Mongo Connection
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.hjk9sp3.mongodb.net/${process.env.DB_NAME}`
-  )
+  .connect(`${process.env.MONGO_URI}`)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
