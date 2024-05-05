@@ -7,10 +7,9 @@ const urlRouter = require("./routes/url");
 const pageRouter = require("./routes/page");
 const userRouter = require("./routes/user");
 const URL = require("./models/url");
-const { restricToLoggedInUser, checkAuth } = require("./middlewares/auth");
+const { checkForAuthentication, restrictTo } = require("./middlewares/auth");
 
 const app = express();
-const PORT = 4979;
 
 // Set View Engine
 app.set("view engine", "ejs");
@@ -20,11 +19,12 @@ app.set("views", path.resolve("./views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(logReqRes("log.txt"));
+app.use(checkForAuthentication);
+app.use(logReqRes());
 
 //Routes
-app.use("/url", restricToLoggedInUser, urlRouter);
-app.use("/", checkAuth, pageRouter);
+app.use("/url", restrictTo(["normal", "admin"]), urlRouter);
+app.use("/", pageRouter);
 app.get("/:shortid", async (req, res) => {
   const shortId = req.params.shortid;
   if (!shortId)
@@ -42,4 +42,4 @@ app.get("/:shortid", async (req, res) => {
 });
 app.use("/user", userRouter);
 
-app.listen(PORT, () => console.log(`Server running at ${PORT}`));
+app.listen(process.env.PORT || 4979, () => console.log(`Server running`));

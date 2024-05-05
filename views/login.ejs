@@ -30,12 +30,12 @@
         />
       </div>
       <button type="submit" class="btn btn-primary">Log In</button>
+      <a href="/signup" class="btn btn-secondary">Sign Up</a>
     </form>
-    <a href="/signup" class="btn btn-secondary">Sign Up</a>
 
     <!-- Dialog to display messages -->
-    <% if (locals.message) { %>
-    <div class="dialog"><%= message %></div>
+    <% if (locals.error) { %>
+    <div class="dialog"><%= error %></div>
     <% } %>
   </div>
 

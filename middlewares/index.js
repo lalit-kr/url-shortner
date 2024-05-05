@@ -1,14 +1,10 @@
-const fs = require("fs");
+const LOG = require("../models/log");
 
-function logReqRes(filename) {
-  return (req, res, next) => {
-    fs.appendFile(
-      filename,
-      `${Date.now()} -- ${req.ip} : ${req.method} ${req.path}\n`,
-      (err, data) => {
-        next();
-      }
-    );
+function logReqRes() {
+  return async (req, res, next) => {
+    const data = { ipAddress: req.ip, method: req.method, path: req.path };
+    await LOG.create(data);
+    next();
   };
 }
 

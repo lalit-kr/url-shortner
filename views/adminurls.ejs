@@ -43,6 +43,9 @@
       <thead>
         <tr>
           <th scope="col">S.No</th>
+          <% if(locals.isAdmin) {%>
+          <th scope="col">Username</th>
+          <% } %>
           <th scope="col">ShortID</th>
           <th scope="col">Redirect URL</th>
           <th scope="col">Clicks</th>
@@ -53,6 +56,9 @@
         <% urls.forEach((url,index) => { %>
         <tr>
           <td><%= index + 1 %></td>
+          <% if(locals.isAdmin) {%>
+          <td><%= url.user.name %></td>
+          <% } %>
           <td>
             <a href="http://localhost:4979/<%= url.shortId %>"
               ><%= url.shortId %></a

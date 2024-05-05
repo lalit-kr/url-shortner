@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+  <h1 class="display-4">URL Details</h1>
+  <hr class="my-4" />
+  <br /><br />
+  <div class="lead">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ShortId</th>
+          <td scope="col">
+            <a href="http://localhost:4979/<%= locals.shortId %>"
+              ><%= locals.shortId %></a
+            >
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">Redirects to</th>
+          <td scope="col"><%= locals.redirectsTo %></td>
+        </tr>
+        <tr>
+          <th scope="col">Created By</th>
+          <td scope="col"><%= locals.createdBy %></td>
+        </tr>
+        <tr>
+          <th scope="col">Created At</th>
+          <td scope="col"><%= locals.createdAt %></td>
+        </tr>
+        <tr>
+          <th scope="col">Total Clicks</th>
+          <td scope="col"><%= locals.totalClicks %></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

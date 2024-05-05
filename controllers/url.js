@@ -1,5 +1,6 @@
 const URL = require("../models/url");
 const { generateShortId } = require("../lib");
+const USER = require("../models/user");
 
 async function generateShortUrl(req, res) {
   const body = req.body;
@@ -22,17 +23,25 @@ async function generateShortUrl(req, res) {
 async function getAnalytics(req, res) {
   const shortId = req.params.shortid;
   if (!shortId)
-    res.status(400).json({ error: "ShortId is required in the url" });
+    return res.status(400).json({ error: "ShortId is required in the url" });
 
   try {
     const result = await URL.findOne({ shortId });
+    const user = await USER.findById(result.createdBy);
+    const isAdmin = user.role === "admin";
 
-    res.status(200).json({
+    return res.status(200).render("analytics", {
+      title: "Analytics",
+      urls: true,
+      shortId: result.shortId,
+      redirectsTo: result.redirectUrl,
+      createdBy: user.name,
+      createdAt: result.createdAt,
       totalClicks: result.visitHistory.length,
-      analytics: result.visitHistory,
+      isAdmin,
     });
   } catch (err) {
-    res.status(404).json({ msg: "ShortId Not Found!" });
+    return res.status(404).redirect("/");
   }
 }
 

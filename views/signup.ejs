@@ -53,9 +53,32 @@
         />
       </div>
       <button type="submit" class="btn btn-primary">Sign Up</button>
+      <a href="/login" class="btn btn-secondary">Login</a>
     </form>
-    <a href="/login" class="btn btn-secondary">Login</a>
   </div>
+  <!-- Dialog to display messages -->
+  <div class="dialog"></div>
 </div>
+
+<script>
+  const form = document.querySelector(".form");
+  const password = document.getElementById("password");
+  const confirmPassword = document.getElementById("confirmPassword");
+  const dialog = document.querySelector(".dialog");
+  dialog.style.display = "none";
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (password.value !== confirmPassword.value) {
+      let error = "Password Mismatch!";
+
+      dialog.innerText = error;
+      dialog.style.display = "block";
+      setTimeout(() => {
+        dialog.style.display = "none";
+      }, 5000);
+    } else form.submit();
+  });
+</script>
 
 <%- include("partials/footer") %>
