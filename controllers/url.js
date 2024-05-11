@@ -14,9 +14,9 @@ async function generateShortUrl(req, res) {
       visitHistory: [],
       createdBy: req.user._id,
     });
-    res.status(201).render("home", { id: shortId });
+    return res.status(201).render("home", { id: shortId });
   } catch (err) {
-    res.status(500).json({ msg: "Server Error" });
+    return res.status(500).render("home", { msg: "Server Error" });
   }
 }
 
