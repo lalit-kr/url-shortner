@@ -1,4 +1,4 @@
-const LOG = require("../models/log");
+const LOG = require(__dirname + "/../models/log");
 
 function logReqRes() {
   return async (req, res, next) => {

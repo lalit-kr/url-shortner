@@ -1,7 +1,7 @@
 const express = require("express");
-const URL = require("../models/url");
-const { restrictTo } = require("../middlewares/auth");
-const { getAnalytics } = require("../controllers/url");
+const URL = require(__dirname + "/../models/url");
+const { restrictTo } = require(__dirname + "/../middlewares/auth");
+const { getAnalytics } = require(__dirname + "/../controllers/url");
 const router = express.Router();
 
 router.get("/", restrictTo(["normal", "admin"]), async (req, res) => {

@@ -1,5 +1,7 @@
-const USER = require("../models/user");
-const { setUser } = require("../service/auth");
+const USER = require(__dirname + "/../models/user");
+const { setUser } = require(__dirname + "/../service/auth");
+
+console.log(__dirname + "/../service/auth");
 
 async function userSignup(req, res) {
   try {
@@ -11,7 +13,9 @@ async function userSignup(req, res) {
     res.cookie("token", token);
     res.status(201).redirect("/");
   } catch (err) {
-    res.status(500).json({ error: "Server Error!" });
+    return res
+      .status(500)
+      .render("signup", { error: "Server Error! Please try again." });
   }
 }
 

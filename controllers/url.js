@@ -1,6 +1,6 @@
-const URL = require("../models/url");
-const { generateShortId } = require("../lib");
-const USER = require("../models/user");
+const URL = require(__dirname + "/../models/url");
+const { generateShortId } = require(__dirname + "/../lib");
+const USER = require(__dirname + "/../models/user");
 
 async function generateShortUrl(req, res) {
   const body = req.body;
