@@ -13,6 +13,7 @@ async function userSignup(req, res) {
     res.cookie("token", token);
     res.status(201).redirect("/");
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .render("signup", { error: "Server Error! Please try again." });
