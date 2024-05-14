@@ -32,7 +32,7 @@
     <% if(locals.id){ %>
     <p>
       Generated URL:
-      <a href="https://url-shortner-eta-beige.vercel.app//<%=id%>">https://url-shortner-eta-beige.vercel.app//<%=id%></a>
+      <a href="https://shorten-url-phi.vercel.app/<%=id%>">https://shorten-url-phi.vercel.app/<%=id%></a>
     </p>
     <% } %>
   </div>
@@ -60,14 +60,14 @@
           <td><%= url.user.name %></td>
           <% } %>
           <td>
-            <a href="https://url-shortner-eta-beige.vercel.app//<%= url.shortId %>"
+            <a href="https://shorten-url-phi.vercel.app/<%= url.shortId %>"
               ><%= url.shortId %></a
             >
           </td>
           <td><%= url.redirectUrl %></td>
           <td><%= url.visitHistory.length %></td>
           <td>
-            <a href="https://url-shortner-eta-beige.vercel.app//analytics/<%= url.shortId %>"
+            <a href="https://shorten-url-phi.vercel.app/analytics/<%= url.shortId %>"
               >View</a
             >
           </td>
