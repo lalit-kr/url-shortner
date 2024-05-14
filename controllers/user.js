@@ -32,6 +32,7 @@ async function userLogin(req, res) {
     res.cookie("token", token);
     return res.status(200).redirect("/");
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .render("login", { error: "Server Error! Please try again." });
